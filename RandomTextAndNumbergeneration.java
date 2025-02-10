@@ -3,6 +3,7 @@ package org.iitwf.selenium.mmpequinox;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +30,8 @@ public class RandomTextAndNumbergeneration {
         System.out.println("Random Email: " + getRandomEmail());
         System.out.println("Random Password: " + getRandomPassword(20));
         System.out.println("Random Phone#: " + getRandomPhoneNumber());
-        System.out.println("Random Future Date: " + getFutureDates(1,"DD/MM/YYYY"));
+        System.out.println("Random Future Date: " + getFutureDates(1,"MM/dd/YYYY"));
+        System.out.println("Random Date: " + getRandomDate());
     }
 
 	    public static String getRandomFirstName() {
@@ -42,6 +44,35 @@ public class RandomTextAndNumbergeneration {
 	        return "AUTLastName" + randomName;
 	    }
 	    
+	    public static String getRandomDate()
+	    {
+	    	Random random = new Random();
+
+	        // Generate a random year between 1900 and 2025
+	        int year = 1940 + random.nextInt(60);
+
+	        // Generate a random month between 0 (January) and 11 (December)
+	        int month = random.nextInt(12);
+
+	        // Generate a random day within the month
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.set(year, month, 1);
+	        int day = 1 + random.nextInt(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+	        // Set the calendar date
+	        calendar.set(year, month, day);
+
+	        // Get the date and format it
+	        Date randomDate = calendar.getTime();
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+	        String formattedDate = dateFormat.format(randomDate);
+
+	        // Print the formatted date
+	        System.out.println("Random Date in MM/dd/yyyy format: " + formattedDate);
+	        
+	        return formattedDate;
+	    }
+	    
 	    public static int getRandomNumber() {
 	    	Random random = new Random();
 	    	return random.nextInt(10000000) + 1; // Generates a random number between 1 and 10000000
@@ -52,14 +83,17 @@ public class RandomTextAndNumbergeneration {
 	    	return random.nextInt(uBound) + lBound; // Generates a random number between 1 and 10000000
 	    }
 	    
-	    public static int getssnNumber() {
-	    	Random random = new Random();
-	    	return random.nextInt(10000000) + 99999999; // Generates a random number between 99999999 and 1000000000
+	    public static String getSSNNumber() {
+	        Random random = new Random();
+	        long ssn = 100000000L + random.nextLong(900000000L); // Generates a random number between 1000000000 and 9999999999
+	        return String.valueOf(ssn); // Converts the number to a string and returns it
 	    }
 	    
-	    public static int getLicNumber() {
+	    public static String getLicNumber() {
 	    	Random random = new Random();
-	    	return random.nextInt(1000000) + 9999999; // Generates a random number between 9999999 and 1000000000
+	        int lic = 10000000 + random.nextInt(90000000); // Generates a random number between 10000000 and 99999999
+	        return String.valueOf(lic); // Converts the number to a string and returns it
+	    	
 	    }
 	    
 	    private static final String[] STREET_NAMES = {
@@ -106,11 +140,11 @@ public class RandomTextAndNumbergeneration {
 	    	return state;
 	    }
 	    
-	    public static int getRandomZipCode()
+	    public static String getRandomZipCode()
 	    {
 	    	Random random = new Random();
 	    	int zipCode = random.nextInt(90000) + 10000; // Generates a random 5-digit zip code
-	    	return zipCode;
+	    	return String.valueOf(zipCode);
 	    }
 	        
 	    public static String getRandomAddress() {
@@ -122,7 +156,8 @@ public class RandomTextAndNumbergeneration {
 	        String state = STATES[random.nextInt(STATES.length)];
 	        int zipCode = random.nextInt(90000) + 10000; // Generates a random 5-digit zip code
 
-	        return streetNumber + " " + streetName + ", " + city + ", " + state + " " + zipCode;
+	        //return streetNumber + " " + streetName + ", " + city + ", " + state + " " + zipCode;
+	        return streetNumber + " " + streetName ;
 	    }
 	    
 	    public static String getRandomEmail() {
@@ -171,6 +206,11 @@ public class RandomTextAndNumbergeneration {
 
 	        // Print the selected option
 	        //System.out.println("Selected Option: " + options.get(randomIndex).getText());
+	    }
+	    
+	    public static String getRandomUsername() {
+	        String randomName = RandomStringUtils.randomAlphabetic(2, 3); // Generates a random alphabetic string of length 5 to 10
+	        return "User" + randomName;
 	    }
 	    
 	    public static String getRandomPassword(int length) {

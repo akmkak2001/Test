@@ -1,0 +1,55 @@
+Phase-1: Implementation/Development
+Create Maven Project
+Update pom.xml with dependencies
+
+Create driver package under Project/src/main/java
+Create pages package under Project/src/main/java
+Create utils package under Project/src/main/java
+Create testcases or tests package under Project/src/test/java
+Create Folder config (Add config.properties file) and testdata (Add Excdel data file for Data Driven Test)
+under Project/src/test/resources
+Create reports folder under Project
+Create screenshots folder under Project/reports
+
+Create DriverScript class under driver package
+DriverScript class - Add Constructor to read properties file, Add method initapplication() to invoke
+browser based on properties file and launch app url. Add method to get app url from properties file.
+Add method to quit driver.
+
+Create Object Repository for each page (For example class for Login Page) under pages package
+which extends DriverScript class.
+Three sections need to be defined for each Page.
+1). Page Elements/Locators
+2). Page Initialization (Constructor)
+3). Page Actions/Methods 
+
+Add ExcelUtil class under utils package
+Add Helper class under utils package (Add CaptureScreen shots method in case of test failure) 
+
+Create BaseTest class under Project/src/test/java which extends DriverScript class
+use annotations @BeforeSuite (to setup reports), 
+@BeforeMethod (initapplication() method and create objects for pages,
+@AfterMethod, 
+@DataProvider(name="") (for data driven tests)
+
+Create test cases under Project/src/test/java and each test extends BaseTest
+Use annotation with priority specified @Test(priority = 1) 
+Use logger = report.createTest("Validate ----"); for each test case.
+Use annotation @Test(dataProvider = "wsdata") for Data driven tests.
+
+To Run all tests as a Suite - highlight tests folder and right click to select 
+TestNG-->Convert to TestNG - testng.xml file gets created.
+Open testng.xml and right click in testng.xml and select RunAs TestNG Suite 
+
+Add build tag to pom.xml and add dependency for maven-surefire-plugin, version 3.5.2.
+Highlight pom.xml - select option Maven Clean and after that Maven Install.
+
+Phase-2: Execution
+Run test cases with Maven pom.xml
+Run test cases through Maven CLI(Command Line Interface)
+Run test cases using run.bat
+Run test cases using Jenkins (using bat file)
+Phase-3: Maintenance
+Creating repository in GITHUB
+Commit the project code in local repository
+Push the project code to GITHUB remote repository from local GIT repository
